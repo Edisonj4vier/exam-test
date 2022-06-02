@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.exam.test.examtest.dto.NewPacienteDTO;
 import com.exam.test.examtest.dto.PacienteDTO;
+import com.exam.test.examtest.exceptions.ResourceNotFoundException;
 import com.exam.test.examtest.models.Paciente;
 import com.exam.test.examtest.repositories.PacienteRepository;
 import com.exam.test.examtest.services.PacienteService;
@@ -47,11 +48,12 @@ public class PacienteServiceImpl implements PacienteService {
     @Transactional
     public PacienteDTO update(PacienteDTO pacienteDTO, Long id) {
         Paciente paciente = pacienteRepository.findById(id)
-        .orElseThrow(()-> new ResourceNotFoundException("Name not fout"));
+            .orElseThrow(()-> new ResourceNotFoundException("Name not fout"));
 
         paciente.setId(id);
         paciente = modelMapper.map(pacienteDTO, Paciente.class);
         pacienteRepository.save(paciente);
+
         return modelMapper.map(paciente, PacienteDTO.class);
     }
 
@@ -65,7 +67,7 @@ public class PacienteServiceImpl implements PacienteService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Paciente> list() {
+    public List<PacienteDTO> list() {
         List<Paciente> pacientes = pacienteRepository.findAll();
         return pacientes.stream().map(paciente -> modelMapper.map(paciente, PacienteDTO.class))
             .collect(Collectors.toList());

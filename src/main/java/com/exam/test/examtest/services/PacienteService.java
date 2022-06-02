@@ -9,7 +9,7 @@ public interface PacienteService {
 
     public PacienteDTO create(NewPacienteDTO pacienteDTO);
     public PacienteDTO retrieve(Long id);
-    public PacienteDTO update(NewPacienteDTO pacienteDTO, Long id);
+    public PacienteDTO update(PacienteDTO pacienteDTO, Long id);
     public void delete(Long id);
 
     public List<PacienteDTO> list();

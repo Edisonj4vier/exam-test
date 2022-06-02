@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class NewPacienteDTO {
-    private String nombre;
+    private String name;
     private int estatura;
     private int peso;
     private Date fechaIngreso;
